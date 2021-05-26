@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @EqualsAndHashCode
+@Builder
 public class UsuarioFrameAulaPK implements Serializable {
     private static final long serialVersion = 1L;
 

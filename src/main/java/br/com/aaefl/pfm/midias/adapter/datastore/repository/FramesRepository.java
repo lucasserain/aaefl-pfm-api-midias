@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @EnableJpaRepositories
-public interface FramesRepository  extends JpaRepository<FramesEntity, String> {
+public interface FramesRepository extends JpaRepository<FramesEntity, String> {
 }

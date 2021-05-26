@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface FramesMapper {
 
@@ -13,4 +15,6 @@ public interface FramesMapper {
 
     @Mapping(source = "idFrame", target = "idFrame")
     FramesEntity framesToFramesEntity(Frames frames);
+
+    List<Frames> entityListToList(List<FramesEntity> framesEntities);
 }
