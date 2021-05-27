@@ -1,8 +1,6 @@
 package br.com.aaefl.pfm.midias.adapter.datastore.mapper;
 
-import br.com.aaefl.pfm.midias.adapter.datastore.entity.UsuarioFrameAulaEntity;
 import br.com.aaefl.pfm.midias.adapter.datastore.entity.UsuarioVideoAulaEntity;
-import br.com.aaefl.pfm.midias.core.model.UsuarioFrameAula;
 import br.com.aaefl.pfm.midias.core.model.UsuarioVideoAula;
 
 import org.mapstruct.Mapper;

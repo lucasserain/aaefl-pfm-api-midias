@@ -1,8 +1,6 @@
 package br.com.aaefl.pfm.midias.adapter.http.controller;
 
-import br.com.aaefl.pfm.midias.core.model.UsuarioFrameAula;
 import br.com.aaefl.pfm.midias.core.model.UsuarioVideoAula;
-import br.com.aaefl.pfm.midias.core.service.UsuarioFrameAulaService;
 import br.com.aaefl.pfm.midias.core.service.UsuarioVideoAulaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

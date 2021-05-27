@@ -1,6 +1,6 @@
 package br.com.aaefl.pfm.midias.adapter.http.controller;
 
-import br.com.aaefl.pfm.midias.core.model.UsuarioFrameAula;
+import br.com.aaefl.pfm.midias.core.model.VideoFrame;
 import br.com.aaefl.pfm.midias.core.service.UsuarioFrameAulaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +19,9 @@ public class FramesController {
     UsuarioFrameAulaService usuarioFrameAulaService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestParam(value="file") MultipartFile multipartFile, UsuarioFrameAula usuarioFrameAula) throws IOException, URISyntaxException {
+    public ResponseEntity<?> create(@RequestParam(value="file") MultipartFile multipartFile, VideoFrame videoFrame) throws IOException, URISyntaxException {
 
-        usuarioFrameAulaService.create(usuarioFrameAula,multipartFile);
+        usuarioFrameAulaService.create(videoFrame,multipartFile);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

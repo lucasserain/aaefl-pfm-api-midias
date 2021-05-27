@@ -1,8 +1,6 @@
 package br.com.aaefl.pfm.midias.core.service;
 
-import br.com.aaefl.pfm.midias.adapter.datastore.mapper.UsuarioFrameAulaMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.UsuarioVideoAulaMapper;
-import br.com.aaefl.pfm.midias.adapter.datastore.repository.UsuarioFrameAulaRepository;
 import br.com.aaefl.pfm.midias.adapter.datastore.repository.UsuarioVideoAulaRepository;
 
 import br.com.aaefl.pfm.midias.core.model.UsuarioVideoAula;

@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class Frames implements Serializable {
 
     private LocalDateTime dataCriacao;
 
-    private LocalDateTime dataAlteracao;
+    private LocalTime tempoFrame;
 
     private String emocao;
 }

@@ -1,9 +1,6 @@
 package br.com.aaefl.pfm.midias.adapter.datastore.repository;
 
-import br.com.aaefl.pfm.midias.adapter.datastore.entity.FramesEntity;
-import br.com.aaefl.pfm.midias.adapter.datastore.entity.UsuarioFrameAulaEntity;
 import br.com.aaefl.pfm.midias.adapter.datastore.entity.UsuariosEntity;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @NoArgsConstructor
 @Getter
@@ -30,8 +31,8 @@ public class FramesEntity implements Serializable {
     @Column(name="dt_cria")
     private LocalDateTime dataCriacao;
 
-    @Column(name="dt_alte")
-    private LocalDateTime dataAlteracao;
+    @Column(name="temp_frame")
+    private LocalTime tempoFrame;
 
     @Column(name="emoc_flux_a")
     private String emocao;

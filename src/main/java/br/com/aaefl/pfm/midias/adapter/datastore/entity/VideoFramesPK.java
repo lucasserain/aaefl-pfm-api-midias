@@ -15,18 +15,12 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode
 @Builder
-public class UsuarioFrameAulaPK implements Serializable {
+public class VideoFramesPK implements Serializable {
     private static final long serialVersion = 1L;
+
+    @Column(name="cod_video")
+    private String codVideo;
 
     @Column(name="cod_frame")
     private String codFrame;
-
-
-    @Column(name="cod_aluno")
-    private String codAluno;
-
-
-    @Column(name="cod_aula")
-    private String codAula;
-
 }

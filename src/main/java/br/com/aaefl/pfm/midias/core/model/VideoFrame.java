@@ -11,16 +11,9 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioFrameAula {
+public class VideoFrame {
+
+    private String codVideo;
 
     private String codFrame;
-
-    private String codAluno;
-
-    private String codAula;
-
-    private Integer indiceFrame;
-
-    private LocalDateTime dataAlteracao;
-
 }

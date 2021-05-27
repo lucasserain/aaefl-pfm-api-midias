@@ -1,13 +1,9 @@
 package br.com.aaefl.pfm.midias.adapter.datastore.mapper;
 
-import br.com.aaefl.pfm.midias.adapter.datastore.entity.UsuarioFrameAulaEntity;
 import br.com.aaefl.pfm.midias.adapter.datastore.entity.UsuariosEntity;
-import br.com.aaefl.pfm.midias.core.model.UsuarioFrameAula;
 import br.com.aaefl.pfm.midias.core.model.Usuarios;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
