@@ -15,6 +15,6 @@ import java.util.List;
 @EnableJpaRepositories
 public interface FramesPageRepository extends PagingAndSortingRepository<FramesEntity, String> {
 
-    @Query("select u from FramesEntity u where u.idFrame = :idFrame")
+    @Query("select u from FramesEntity u where u.idFrame = :idFrame order by u.tempoFrame")
     List<FramesEntity> findAllByIdFrame(@Param("idFrame")String idFrame, Pageable pageable);
 }
