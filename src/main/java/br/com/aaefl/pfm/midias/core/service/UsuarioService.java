@@ -19,13 +19,13 @@ public class UsuarioService {
     @Autowired
     UsuariosPageRepository usuariosPageRepository;
 
-    public List<Usuarios> findUsuarios(int size, int page, Optional<String> nome) {
+    public List<Usuarios> findUsuarios(int size, int page, Optional<String> nome, int tipo) {
         Pageable paginacao = PageRequest.of(page,size);
 
         if(nome.isEmpty()) {
-            return UsuariosMapper.INSTANCE.usuarioEntityPageToUsuarios(usuariosPageRepository.findAllAlunos(paginacao));
+            return UsuariosMapper.INSTANCE.usuarioEntityPageToUsuarios(usuariosPageRepository.findAllAlunos(paginacao,tipo));
         }else{
-            return UsuariosMapper.INSTANCE.usuarioEntityPageToUsuarios(usuariosPageRepository.findAlunosName(nome.get(),paginacao));
+            return UsuariosMapper.INSTANCE.usuarioEntityPageToUsuarios(usuariosPageRepository.findAlunosName(nome.get(),paginacao,tipo));
         }
 
 

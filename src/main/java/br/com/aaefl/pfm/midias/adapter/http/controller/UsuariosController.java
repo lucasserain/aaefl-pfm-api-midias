@@ -19,18 +19,23 @@ public class UsuariosController {
     @GetMapping
     public List<Usuarios> getUsuarios(@RequestParam(value= "page", required = false) Optional<Integer> pageR,
                                       @RequestParam(value="size", required = false) Optional<Integer> sizeR,
-                                      @RequestParam(value="nome", required = false) Optional<String> nome){
+                                      @RequestParam(value="nome", required = false) Optional<String> nome,
+                                      @RequestParam(value="tipo", required = false) Optional<Integer> tipoR){
 
         int page =0;
         int size =10;
+        int tipo = 1;
         if(pageR.isPresent()){
             page = pageR.get();
         }
         if(sizeR.isPresent()){
             size = sizeR.get();
         }
+        if(tipoR.isPresent()){
+            tipo = tipoR.get();
+        }
 
-        return usuarioService.findUsuarios(size, page, nome);
+        return usuarioService.findUsuarios(size, page, nome,tipo);
 
     }
 

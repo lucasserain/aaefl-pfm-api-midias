@@ -14,10 +14,10 @@ import java.util.List;
 @EnableJpaRepositories
 public interface UsuariosPageRepository extends PagingAndSortingRepository<UsuariosEntity, String> {
 
-    @Query("select u from UsuariosEntity u where u.tipoUsuario = 1")
-    List<UsuariosEntity> findAllAlunos(Pageable pageable);
+    @Query("select u from UsuariosEntity u where u.tipoUsuario = :tipo")
+    List<UsuariosEntity> findAllAlunos(Pageable pageable, @Param("tipo")int tipo);
 
 
-    @Query("select u from UsuariosEntity u where u.tipoUsuario = 1 and u.nome LIKE %:nome%")
-    List<UsuariosEntity> findAlunosName(@Param("nome") String nome, Pageable paginacao);
+    @Query("select u from UsuariosEntity u where u.tipoUsuario = :tipo and u.nome LIKE %:nome%")
+    List<UsuariosEntity> findAlunosName(@Param("nome") String nome, Pageable paginacao,@Param("tipo") int tipo);
 }
