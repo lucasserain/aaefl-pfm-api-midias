@@ -15,4 +15,6 @@ public interface DisciplinaMapper {
     DisciplinaMapper INSTANCE = Mappers.getMapper(DisciplinaMapper.class);
 
     DisciplinaEntity disciplinaToEntity(Disciplina disciplina);
+
+    List<Disciplina> disciplinaEntityListToDisciplina(List<DisciplinaEntity> all);
 }

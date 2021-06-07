@@ -16,4 +16,7 @@ import java.util.List;
 @EnableJpaRepositories
 public interface AlunoDisciplinaRepository extends JpaRepository<AlunoDisciplinaEntity, AlunoDisciplinaPK> {
 
+    @Query("select u.codAluno from AlunoDisciplinaEntity u where u.codDisciplina = :codDisciplina")
+    List<String> buscaUsuariosPorDisciplina(@Param("codDisciplina") String codDisciplina);
+
 }

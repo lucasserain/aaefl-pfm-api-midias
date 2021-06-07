@@ -1,25 +1,27 @@
 package br.com.aaefl.pfm.midias.core.service;
 
-import br.com.aaefl.pfm.midias.adapter.datastore.entity.AlunoDisciplinaEntity;
 import br.com.aaefl.pfm.midias.adapter.datastore.entity.AlunoDisciplinaPK;
-import br.com.aaefl.pfm.midias.adapter.datastore.entity.DisciplinaEntity;
+import br.com.aaefl.pfm.midias.adapter.datastore.entity.AulaEntity;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.AlunoDisciplinaMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.AulaMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.DisciplinaMapper;
+import br.com.aaefl.pfm.midias.adapter.datastore.mapper.UsuariosMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.repository.AlunoDisciplinaRepository;
 import br.com.aaefl.pfm.midias.adapter.datastore.repository.AulaRepository;
 import br.com.aaefl.pfm.midias.adapter.datastore.repository.DisciplinaRepository;
+import br.com.aaefl.pfm.midias.adapter.datastore.repository.UsuariosPageRepository;
 import br.com.aaefl.pfm.midias.core.model.AlunoDisciplina;
 import br.com.aaefl.pfm.midias.core.model.Aula;
 import br.com.aaefl.pfm.midias.core.model.Disciplina;
+import br.com.aaefl.pfm.midias.core.model.Usuarios;
 import br.com.aaefl.pfm.midias.core.service.exception.ObjectAlreadyExistsException;
-import org.joda.time.Minutes;
+import br.com.aaefl.pfm.midias.core.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -33,6 +35,9 @@ public class DisciplinaService {
 
     @Autowired
     AlunoDisciplinaRepository alunoDisciplinaRepository;
+
+    @Autowired
+    UsuariosPageRepository usuariosPageRepository;
 
 
 
@@ -96,5 +101,35 @@ public class DisciplinaService {
         alunoDisciplinaRepository.save(AlunoDisciplinaMapper.INSTANCE.alunoDisciplinaToEntity(alunoDisciplina));
 
         return alunoDisciplina;
+    }
+
+    public List<Disciplina> bucaDisciplinas() {
+        return DisciplinaMapper.INSTANCE.disciplinaEntityListToDisciplina(disciplinaRepository.findAll());
+
+    }
+
+    public Object bucaDisciplina(String idDisciplina) {
+        return disciplinaRepository.findById(idDisciplina);
+    }
+
+    public List<Aula> buscaAulasPorDisciplina(String idDisciplina){
+        return AulaMapper.INSTANCE.aulaToEntity(aulaRepository.findAulasByIdDisciplina(idDisciplina));
+
+    }
+
+    public List<Usuarios> buscaAlunosPorDisciplina(String idDisciplina) {
+
+        List<String> codigosAlunos = alunoDisciplinaRepository.buscaUsuariosPorDisciplina(idDisciplina);
+
+        if(codigosAlunos.isEmpty()){
+            throw new ObjectNotFoundException("Não há alunos cadastrados para essa disciplina! Id: " + idDisciplina + ", Tipo: " + Disciplina.class.getName());
+        }
+
+        return UsuariosMapper.INSTANCE.usuarioEntityPageToUsuarios(usuariosPageRepository.findAllById(codigosAlunos));
+
+    }
+
+    public Object buscaProfessor(String idDisciplina) {
+       return  usuariosPageRepository.findById(disciplinaRepository.findById(idDisciplina).get().getCodProfessor());
     }
 }

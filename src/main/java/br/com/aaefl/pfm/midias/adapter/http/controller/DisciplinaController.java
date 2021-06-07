@@ -41,4 +41,30 @@ public class DisciplinaController {
         return  ResponseEntity.ok().body(disciplinaService.relacionaAluno(idDisciplina,idAluno));
     }
 
+    @GetMapping
+    public ResponseEntity<?> get() throws ObjectAlreadyExistsException {
+        return  ResponseEntity.ok().body(disciplinaService.bucaDisciplinas());
+    }
+
+    @GetMapping(value="{idDisciplina}")
+    public ResponseEntity<?> get(@PathVariable("idDisciplina") String idDisciplina){
+        return  ResponseEntity.ok().body(disciplinaService.bucaDisciplina(idDisciplina));
+    }
+
+    @GetMapping(value="{idDisciplina}/professor")
+    public ResponseEntity<?> getProfessor(@PathVariable("idDisciplina") String idDisciplina){
+        return  ResponseEntity.ok().body(disciplinaService.buscaProfessor(idDisciplina));
+    }
+
+
+    @GetMapping(value="{idDisciplina}/aulas")
+    public ResponseEntity<?> getAulasDisciplina(@PathVariable("idDisciplina") String idDisciplina){
+        return  ResponseEntity.ok().body(disciplinaService.buscaAulasPorDisciplina(idDisciplina));
+    }
+    @GetMapping(value="{idDisciplina}/alunos")
+    public ResponseEntity<?> getAlunosDisciplina(@PathVariable("idDisciplina") String idDisciplina){
+        return  ResponseEntity.ok().body(disciplinaService.buscaAlunosPorDisciplina(idDisciplina));
+    }
+
+
 }

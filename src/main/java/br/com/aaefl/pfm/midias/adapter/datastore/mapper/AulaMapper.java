@@ -7,10 +7,15 @@ import br.com.aaefl.pfm.midias.core.model.Disciplina;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface AulaMapper {
 
     AulaMapper INSTANCE = Mappers.getMapper(AulaMapper.class);
 
     AulaEntity aulaToEntity(Aula aula);
+
+
+    List<Aula> aulaToEntity(List<AulaEntity> aulasByIdDisciplina);
 }

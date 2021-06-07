@@ -38,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/usuarios/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/usuarios/*").permitAll()
                 .antMatchers("/usuarios/*").permitAll()
+                .antMatchers(HttpMethod.POST, "/disciplina").permitAll()
+                .antMatchers(HttpMethod.GET, "/disciplina").permitAll()
+                .antMatchers("/disciplina").permitAll()
                 .antMatchers(HttpMethod.POST, "/disciplina/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/disciplina/*").permitAll()
                 .antMatchers("/disciplina/*").permitAll()
@@ -53,6 +56,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/disciplina/*/aluno/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/disciplina/*/aluno/*").permitAll()
                 .antMatchers("/disciplina/*/aluno/*").permitAll()
+                .antMatchers(HttpMethod.POST, "/disciplina/*/alunos").permitAll()
+                .antMatchers(HttpMethod.GET, "/disciplina/*/alunos").permitAll()
+                .antMatchers("/disciplina/*/alunos").permitAll()
+                .antMatchers(HttpMethod.POST, "/disciplina/*/aulas").permitAll()
+                .antMatchers(HttpMethod.GET, "/disciplina/*/aulas").permitAll()
+                .antMatchers("/disciplina/*/aulas").permitAll()
+                .antMatchers(HttpMethod.POST, "/disciplina/*/professor").permitAll()
+                .antMatchers(HttpMethod.GET, "/disciplina/*/professor").permitAll()
+                .antMatchers("/disciplina/*/professor").permitAll()
                 .anyRequest().authenticated();
 
     }
