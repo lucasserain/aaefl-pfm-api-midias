@@ -19,4 +19,6 @@ public interface AlunoDisciplinaRepository extends JpaRepository<AlunoDisciplina
     @Query("select u.codAluno from AlunoDisciplinaEntity u where u.codDisciplina = :codDisciplina")
     List<String> buscaUsuariosPorDisciplina(@Param("codDisciplina") String codDisciplina);
 
+    @Query("select u.codDisciplina from AlunoDisciplinaEntity u where u.codAluno = :codAluno")
+    List<String> buscaDisciplinasPorUsuario(@Param("codAluno") String codAluno);
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,5 +23,6 @@ public class Disciplina {
     @Length(min=5, max=255, message = "O tamanho deve ser entre 5 e 255 caracteres ")
     String descricao;
     String urlFundo;
+    List<Usuarios> alunos;
 
 }

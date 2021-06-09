@@ -2,6 +2,7 @@ package br.com.aaefl.pfm.midias.core.service;
 
 import br.com.aaefl.pfm.midias.adapter.datastore.entity.AlunoDisciplinaPK;
 import br.com.aaefl.pfm.midias.adapter.datastore.entity.AulaEntity;
+import br.com.aaefl.pfm.midias.adapter.datastore.entity.UsuariosEntity;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.AlunoDisciplinaMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.AulaMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.DisciplinaMapper;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -131,5 +133,21 @@ public class DisciplinaService {
 
     public Object buscaProfessor(String idDisciplina) {
        return  usuariosPageRepository.findById(disciplinaRepository.findById(idDisciplina).get().getCodProfessor());
+    }
+
+    public Object buscaDisciplinasPorUsuario(String idUsuario) {
+        Optional<UsuariosEntity> usuario = usuariosPageRepository.findById(idUsuario);
+
+        if(usuario.isEmpty()){
+            throw new ObjectNotFoundException("Não há disciplinas para esse usuário! Id: " + idUsuario + ", Tipo: " + Disciplina.class.getName());
+        }
+        if(usuario.get().getTipoUsuario()==2){
+            return disciplinaRepository.buscaDisciplinasPorProfessor(idUsuario);
+        }
+        else if( usuario.get().getTipoUsuario()==1){
+            List<String> disciplinas = alunoDisciplinaRepository.buscaDisciplinasPorUsuario(idUsuario);
+            return disciplinaRepository.findAllById(disciplinas);
+        }
+       return null;
     }
 }

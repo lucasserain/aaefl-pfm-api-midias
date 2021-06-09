@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface UsuariosMapper {
@@ -18,4 +19,6 @@ public interface UsuariosMapper {
 
     @Mapping(source = "codUsuario", target = "codAluno")
     List<Usuarios> usuarioEntityPageToUsuarios(Iterable<UsuariosEntity> allById);
+
+    Usuarios entityToUsuario(UsuariosEntity byId);
 }

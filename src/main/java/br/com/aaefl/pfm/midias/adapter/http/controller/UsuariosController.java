@@ -39,8 +39,8 @@ public class UsuariosController {
 
     }
 
-    @GetMapping(value="{/idUsuario}")
-    public List<Usuarios> getUsuario(@RequestParam(value= "page", required = false) Optional<Integer> pageR,
+    @GetMapping(value="/{idUsuario}")
+    public Usuarios getUsuario(@RequestParam(value= "page", required = false) Optional<Integer> pageR,
                                       @RequestParam(value="size", required = false) Optional<Integer> sizeR,
                                      @RequestParam(value="nome", required = false) Optional<String> nome,
                                      @PathVariable("idUsuario") String idUsuario){
@@ -54,7 +54,6 @@ public class UsuariosController {
             size = sizeR.get();
         }
 
-       // return usuarioService.findUsuarioById(idUsuario,size, page);
-        return null;
+        return usuarioService.findUsuarioById(idUsuario,size, page);
     }
 }

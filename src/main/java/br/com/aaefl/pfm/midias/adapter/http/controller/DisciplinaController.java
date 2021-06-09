@@ -61,10 +61,15 @@ public class DisciplinaController {
     public ResponseEntity<?> getAulasDisciplina(@PathVariable("idDisciplina") String idDisciplina){
         return  ResponseEntity.ok().body(disciplinaService.buscaAulasPorDisciplina(idDisciplina));
     }
+
     @GetMapping(value="{idDisciplina}/alunos")
     public ResponseEntity<?> getAlunosDisciplina(@PathVariable("idDisciplina") String idDisciplina){
         return  ResponseEntity.ok().body(disciplinaService.buscaAlunosPorDisciplina(idDisciplina));
     }
 
+    @GetMapping(value="/usuario/{idUsuario}")
+    public ResponseEntity<?> getDisciplinasPorUsuario(@PathVariable("idUsuario") String idUsuario){
+        return  ResponseEntity.ok().body(disciplinaService.buscaDisciplinasPorUsuario(idUsuario));
+    }
 
 }
