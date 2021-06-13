@@ -18,4 +18,6 @@ public interface AulaMapper {
 
 
     List<Aula> aulaToEntity(List<AulaEntity> aulasByIdDisciplina);
+
+    Aula entityToAula(AulaEntity aulaEntity);
 }

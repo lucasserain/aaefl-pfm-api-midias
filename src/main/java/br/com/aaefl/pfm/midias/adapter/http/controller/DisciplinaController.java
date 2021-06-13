@@ -62,6 +62,7 @@ public class DisciplinaController {
         return  ResponseEntity.ok().body(disciplinaService.buscaAulasPorDisciplina(idDisciplina));
     }
 
+
     @GetMapping(value="{idDisciplina}/alunos")
     public ResponseEntity<?> getAlunosDisciplina(@PathVariable("idDisciplina") String idDisciplina){
         return  ResponseEntity.ok().body(disciplinaService.buscaAlunosPorDisciplina(idDisciplina));
