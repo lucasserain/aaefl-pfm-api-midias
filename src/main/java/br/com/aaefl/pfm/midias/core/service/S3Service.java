@@ -37,7 +37,7 @@ public class S3Service {
     public URI uploadFile(InputStream is, String fileName, String contetTYpe) throws URISyntaxException {
         ObjectMetadata meta = new ObjectMetadata();
         meta.setContentType(contetTYpe);
-        s3client.putObject(new PutObjectRequest(bucketName, fileName, is, meta).withCannedAcl(CannedAccessControlList.PublicRead));
+        s3client.putObject(new PutObjectRequest(bucketName, fileName+".mp4", is, meta).withCannedAcl(CannedAccessControlList.PublicRead));
         return  s3client.getUrl(bucketName,fileName).toURI();
     }
 
