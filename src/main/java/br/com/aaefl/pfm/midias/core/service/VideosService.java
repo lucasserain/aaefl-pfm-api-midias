@@ -31,7 +31,7 @@ public class VideosService {
 
         Videos videos = Videos.builder()
                 .idVideo(codVideo)
-                .urlVideo(uploadFramePicture(multipartFile).toString())
+                .urlVideo(uploadFramePicture(multipartFile).toString()+".mp4")
                 .dataCriacao(LocalDateTime.now())
                 .build();
 
