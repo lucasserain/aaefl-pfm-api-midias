@@ -1,6 +1,7 @@
 package br.com.aaefl.pfm.midias.core.service;
 
 import br.com.aaefl.pfm.midias.adapter.datastore.entity.FramesEntity;
+import br.com.aaefl.pfm.midias.adapter.datastore.entity.UsuarioVideoAulaEntity;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.FramesMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.VideoFramesMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.repository.FramesPageRepository;
@@ -83,8 +84,22 @@ public class UsuarioFrameAulaService {
         List<String> idsVideo = new ArrayList<String>();
         List<String> listaFrames = new ArrayList<String>();
 
+
         if(idAluno == null){
-            idsVideo = videosPageRepository.buscaVideoPorAula(idAula);
+            List<FramesEntity> framesEntities = new ArrayList<>();
+            List<UsuarioVideoAulaEntity> listaAlunos = videosPageRepository.buscaAlunosPorAula(idAula);
+            for (UsuarioVideoAulaEntity listaAluno : listaAlunos) {
+                List<String> idframes = frameVideoRepository.buscaIdFramePorVideo(listaAluno.getCodVideo());
+                List<FramesEntity> allById = framesRepository.findAllById(idframes);
+                allById.sort(Comparator.comparing(FramesEntity::getTempoFrame));
+                allById = allById
+                        .stream()
+                        .filter(distinctByKey(FramesEntity::getTempoFrame))
+                        .collect(Collectors.toList());
+                framesEntities.addAll(allById);
+            }
+            framesEntities.sort(Comparator.comparing(FramesEntity::getTempoFrame));
+            return FramesMapper.INSTANCE.entityListToList(framesEntities);
         }else{
             idsVideo = videosPageRepository.buscaVideoPorAulaAluno(idAula,idAluno);
         }

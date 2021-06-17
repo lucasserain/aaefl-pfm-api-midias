@@ -22,4 +22,7 @@ public interface VideosPageRepository extends PagingAndSortingRepository<Usuario
 
     @Query("select u.codVideo from UsuarioVideoAulaEntity u where u.codAula = :idAula and u.codAluno = :idAluno")
     List<String> buscaVideoPorAulaAluno(@Param("idAula") String idAula, @Param("idAluno") String idAluno);
+
+    @Query("select u from UsuarioVideoAulaEntity u where u.codAula = :idAula")
+    List<UsuarioVideoAulaEntity> buscaAlunosPorAula(@Param("idAula") String idAula);
 }
