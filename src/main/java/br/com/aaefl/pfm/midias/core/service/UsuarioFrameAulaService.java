@@ -92,12 +92,15 @@ public class UsuarioFrameAulaService {
         idsVideo.forEach( v ->  listaFrames.addAll(frameVideoRepository.buscaIdFramePorVideo(v)));
         List<FramesEntity> framesEntity = framesRepository.findAllById(listaFrames);
         framesEntity.sort(Comparator.comparing(FramesEntity::getTempoFrame));
-        List<FramesEntity> collect = framesEntity
-                .stream()
-                .filter(distinctByKey(FramesEntity::getTempoFrame))
-                .collect(Collectors.toList());
+        if(idAluno!=null){
+            List<FramesEntity> collect = framesEntity
+                    .stream()
+                    .filter(distinctByKey(FramesEntity::getTempoFrame))
+                    .collect(Collectors.toList());
+            return FramesMapper.INSTANCE.entityListToList(collect);
 
-        return FramesMapper.INSTANCE.entityListToList(collect);
+        }
+        return FramesMapper.INSTANCE.entityListToList(framesEntity);
 
     }
 }
