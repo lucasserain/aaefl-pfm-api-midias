@@ -21,6 +21,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioFrameAulaService {
@@ -68,6 +73,11 @@ public class UsuarioFrameAulaService {
         return framesJooj;
     }
 
+    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
+    }
+
     public List<Frames> findFramesByClass(String idAula, String idAluno, int size, int page) {
         Pageable paginacao = PageRequest.of(page,size);
         List<String> idsVideo = new ArrayList<String>();
@@ -82,7 +92,12 @@ public class UsuarioFrameAulaService {
         idsVideo.forEach( v ->  listaFrames.addAll(frameVideoRepository.buscaIdFramePorVideo(v)));
         List<FramesEntity> framesEntity = framesRepository.findAllById(listaFrames);
         framesEntity.sort(Comparator.comparing(FramesEntity::getTempoFrame));
-        return FramesMapper.INSTANCE.entityListToList(framesEntity);
+        List<FramesEntity> collect = framesEntity
+                .stream()
+                .filter(distinctByKey(FramesEntity::getTempoFrame))
+                .collect(Collectors.toList());
+
+        return FramesMapper.INSTANCE.entityListToList(collect);
 
     }
 }
