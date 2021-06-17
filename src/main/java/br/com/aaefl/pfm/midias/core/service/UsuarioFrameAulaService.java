@@ -1,5 +1,6 @@
 package br.com.aaefl.pfm.midias.core.service;
 
+import br.com.aaefl.pfm.midias.adapter.datastore.entity.FramesEntity;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.FramesMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.mapper.VideoFramesMapper;
 import br.com.aaefl.pfm.midias.adapter.datastore.repository.FramesPageRepository;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -64,5 +66,23 @@ public class UsuarioFrameAulaService {
         List<Frames> framesJooj = FramesMapper.INSTANCE.entityListToList(framesRepository.findAllById(listaFrames));
 
         return framesJooj;
+    }
+
+    public List<Frames> findFramesByClass(String idAula, String idAluno, int size, int page) {
+        Pageable paginacao = PageRequest.of(page,size);
+        List<String> idsVideo = new ArrayList<String>();
+        List<String> listaFrames = new ArrayList<String>();
+
+        if(idAluno == null){
+            idsVideo = videosPageRepository.buscaVideoPorAula(idAula);
+        }else{
+            idsVideo = videosPageRepository.buscaVideoPorAulaAluno(idAula,idAluno);
+        }
+
+        idsVideo.forEach( v ->  listaFrames.addAll(frameVideoRepository.buscaIdFramePorVideo(v)));
+        List<FramesEntity> framesEntity = framesRepository.findAllById(listaFrames);
+        framesEntity.sort(Comparator.comparing(FramesEntity::getTempoFrame));
+        return FramesMapper.INSTANCE.entityListToList(framesEntity);
+
     }
 }

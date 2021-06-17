@@ -38,4 +38,24 @@ public class RelatorioController {
 
         return frames;
     }
+
+    @GetMapping(value="aulas/{idAula}")
+    public List<Frames> getReportClass(@PathVariable("idAula") String idAula,
+                                  @RequestParam(value = "idAluno", required = false) String idAluno,
+                                  @RequestParam(value= "page", required = false) Optional<Integer> pageR,
+                                  @RequestParam(value="size", required = false) Optional<Integer> sizeR ) throws ChangeSetPersister.NotFoundException {
+
+        int page =0;
+        int size =10;
+        if(pageR.isPresent()){
+            page = pageR.get();
+        }
+        if(sizeR.isPresent()){
+            size = sizeR.get();
+        }
+
+        List<Frames> frames = usuarioFrameAulaService.findFramesByClass(idAula, idAluno, size, page);
+
+        return frames;
+    }
 }
